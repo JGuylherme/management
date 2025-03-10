@@ -1,0 +1,8 @@
+.tippy-box[data-theme~='custom'] {
+    background-color: #f9fafb;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+}
+.tippy-box[data-theme~='custom'] .tippy-arrow {
+    color: #f9fafb;
+}
