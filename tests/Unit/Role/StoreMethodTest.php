@@ -81,7 +81,7 @@ class StoreMethodTest extends TestCase
 
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertEquals(route('roles.index'), $response->headers->get('Location'));
-        $this->assertEquals('Role created successfully.', session('success'));
+        $this->assertEquals('Role created successfully!', session('success'));
     }
 
     /**

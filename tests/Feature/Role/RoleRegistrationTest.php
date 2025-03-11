@@ -24,7 +24,7 @@ class RoleRegistrationTest extends TestCase
         ]);
 
         $response->assertRedirect(route('roles.index'));
-        $response->assertSessionHas('success', 'Role created successfully.');
+        $response->assertSessionHas('success', 'Role created successfully!');
 
         $this->assertDatabaseHas('roles', [
             'code' => 'ABC1234',
