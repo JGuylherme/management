@@ -30,9 +30,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'code' => 'required|string|unique:roles,code|regex:/^[A-Za-z]{3}[0-9]{4}$/',
-            'name' => 'required|string',
+            'name' => 'required|string|max:255',
         ]);
 
         Role::create([
