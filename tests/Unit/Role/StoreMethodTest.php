@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use PHPUnit\Framework\TestCase;
 use Mockery;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Artisan;
 
 /**
  * Class StoreMethodTest
@@ -26,6 +27,11 @@ class StoreMethodTest extends TestCase
         $app = require __DIR__ . '/../../../bootstrap/app.php';
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
         Facade::setFacadeApplication($app);
+
+        config()->set('database.default', 'sqlite');
+        config()->set('database.connections.sqlite.database', ':memory:');
+
+        Artisan::call('migrate');
     }
 
     /**
@@ -33,9 +39,7 @@ class StoreMethodTest extends TestCase
      */
     public function tearDown(): void
     {
-        // Delete the role that was added during the test
-        Role::where('code', 'ABC1234')->delete();
-        Role::where('code', 'ABC0010')->delete();
+        Artisan::call('migrate:rollback');
 
         Mockery::close();
         restore_error_handler();
