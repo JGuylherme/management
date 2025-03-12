@@ -26,7 +26,13 @@ jobs:
     - name: Start Laravel server
       run: php artisan serve --host=127.0.0.1 --port=8000 &
     - name: Wait for server to be ready
-      run: npx wait-on http://127.0.0.1:8000
+      run: |
+        echo "Waiting for server to be ready..."
+        sleep 10
+        npx wait-on http://127.0.0.1:8000 --timeout 300000
+        echo "Server is ready."
+    - name: Check server status
+      run: curl -I http://127.0.0.1:8000
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4
